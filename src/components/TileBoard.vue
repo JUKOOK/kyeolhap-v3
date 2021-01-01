@@ -96,7 +96,7 @@ export default {
     },
     drawBorderError() {
       const elem = this.$refs.borderWrap;
-      if (elem) this._toggleClass(elem, "error-border", 500);
+      if (elem) this._toggleClass(elem, "error-border", 600);
     },
     _toggleClass(elem, cls, timeout) {
       elem.classList.add(cls);
@@ -150,7 +150,6 @@ export default {
 .question-area .tile-board {
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
 }
 
 .question-area .tile-border-wrap {
@@ -178,7 +177,7 @@ export default {
     content: "";
     width: 0;
     height: 0;
-    border: 3px solid transparent;
+    border: 4px solid transparent;
     position: absolute;
     top: 0;
     left: 0;
