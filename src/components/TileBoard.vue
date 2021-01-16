@@ -6,7 +6,7 @@
       v-if="currentMode === 'end'"
     >
       <button type="button" class="btn-start-round" @click="startNextRound">
-        {{ currentRound + 1 }} ROUND 시작
+        {{ currentRound + 1 }} ROUND
       </button>
     </div>
     <div class="tile-board">
@@ -119,17 +119,18 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: rgba(7, 0, 0, 0.66);
+  background-color: rgba(7, 0, 0, 0.75);
   z-index: 1;
   .btn-start-round {
-    width: 21.2rem;
-    height: 4.8rem;
-    line-height: 4rem;
+    width: 29.6rem;
+    height: 7.2rem;
+    line-height: 6.4rem;
     border-radius: 4px;
     padding: 4px 0;
-    font-size: 2.2rem;
+    font-size: 3.2rem;
     text-align: center;
-    font-weight: 600;
+    font-weight: 800;
+    letter-spacing: 1.6px;
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -189,13 +190,13 @@ export default {
       height: 100%;
     }
     &::before {
-      border-top-color: rgb(16, 5, 167);
-      border-right-color: rgb(16, 5, 167);
+      border-top-color: gold;
+      border-right-color: gold;
       transition: width 0.4s ease-out, height 0.4s ease-out 0.4s;
     }
     &::after {
-      border-bottom-color: rgb(16, 5, 167);
-      border-left-color: rgb(16, 5, 167);
+      border-bottom-color: gold;
+      border-left-color: gold;
       transition: height 0.4s ease-out, width 0.4s ease-out 0.4s;
     }
   }

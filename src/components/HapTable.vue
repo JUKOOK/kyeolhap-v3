@@ -1,13 +1,11 @@
 <template>
   <div class="hap-table-area">
-    <ul class="hap-table">
-      <li
-        class="hap"
-        v-for="n in 14"
-        :key="n"
-        v-html="splitAnswer(habTables[n - 1])"
-      ></li>
-    </ul>
+    <div
+      class="hap"
+      v-for="n in 14"
+      :key="n"
+      v-html="splitAnswer(habTables[n - 1])"
+    ></div>
   </div>
 </template>
 
@@ -43,10 +41,10 @@ export default {
   methods: {
     splitAnswer(num) {
       if (num === null) return "<span></span>";
-      else if (num === 0) return "<span>ㅡ</span>";
+      else if (num === 0) return `<div class="wrap"><span>&#8213;</span></div>`;
       else {
         let str = num.toString();
-        return `<span>${str[0]}</span><span>${str[1]}</span><span>${str[2]}</span>`;
+        return `<div class="wrap"><span>${str[0]}</span><span>${str[1]}</span><span>${str[2]}</span></div>`;
       }
     },
 
@@ -63,33 +61,32 @@ export default {
 <style lang="scss" scoped>
 .hap-table-area {
   width: 36rem;
-  height: 100%;
+  height: 84rem;
   margin-left: 7.6rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.hap-table-area .hap-table {
-  margin-top: 2px;
-  border: 3px solid #000;
+.hap-table-area .hap {
+  width: 100%;
+  flex: 1;
   background-color: #fff;
-  .hap {
+  position: relative;
+  border: 3px solid #000;
+  &:not(:first-child) {
+    border-top: 0;
+  }
+  &::v-deep .wrap {
     width: 100%;
-    height: 5.9rem;
-    list-style: none;
-    border-bottom: 2px solid #000;
-    text-align: center;
-    &:last-child {
-      border-bottom: 0;
-    }
-    &::v-deep span {
-      height: 5.7rem;
-      line-height: 5rem;
-      display: inline-block;
-      font-size: 5.2rem;
-      font-weight: 600;
-      margin-right: 4.8rem;
-      &:last-child {
-        margin-right: 0;
-      }
+    height: 100%;
+    padding: 0 3.2rem;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    span {
+      font-size: 4.4rem;
+      font-weight: 800;
     }
   }
 }

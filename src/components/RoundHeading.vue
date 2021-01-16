@@ -35,7 +35,7 @@ export default {
 .round-heading-area {
   width: 32rem;
   height: 100%;
-  margin-right: 2.4rem;
+  margin-right: 3.6rem;
   .tutorial,
   .round {
     width: 100%;
@@ -46,12 +46,12 @@ export default {
     align-items: center;
   }
   h1 {
-    font-size: 10.2rem;
+    font-size: 10.8rem;
     font-weight: 600;
-    color: #070000;
+    color: #000;
   }
   .tutorial h1 {
-    font-size: 8rem;
+    font-size: 8.4rem;
   }
 }
 </style>
