@@ -1,10 +1,5 @@
 <template>
-  <input
-    type="number"
-    class="input-answer"
-    v-model="userInput"
-    @keypress.enter="keyEnter"
-  />
+  <input type="text" class="input-answer" v-model="answerInput" />
 </template>
 
 <script>
@@ -15,8 +10,12 @@ import questionConst from "../core/question-contants.js";
 export default {
   data() {
     return {
-      userInput: "",
+      answerInput: "",
+      answerState: "",
+
       currentHaps: [],
+      currentHapCount: 0,
+      remainHaps: [],
       remainHapCount: -1,
     };
   },
@@ -30,13 +29,20 @@ export default {
     currentRound: {
       immediate: true,
       handler() {
+        this.answerInput = "";
+        this.answerState = "";
         this.currentHaps = [];
+        this.currentHapCount = 0;
+        this.remainHaps = [...this.question.haps];
         this.remainHapCount = this.question.hapCount;
         console.clear();
         console.log(
           `Q-${this.currentRound}번\n합 목록 : ${this.question.haps}\n합 개수 : ${this.question.hapCount}`
         );
       },
+    },
+    answerInput() {
+      this.keyEnter();
     },
   },
   methods: {
@@ -47,29 +53,35 @@ export default {
       "TOGGLE_CURRENT_TURN",
     ]),
     keyEnter() {
+      if (this.answerInput === "") return;
+      const inputStr = this.answerInput.toString();
       console.log(
         "----------------------------------------------------------------------------------"
       );
-      if (this.userInput === "0") {
-        console.log(`${this.currentTurn}플레이어 답안 : 결`);
+      if (inputStr === "0") {
+        this.answerState = `${this.currentTurn}플레이어 답안 : 결`;
+        console.log(this.answerState);
         setTimeout(() => {
           this.checkKyeol();
-          this.userInput = "";
+          this.answerInput = "";
         }, 1500);
-      } else if (this.userInput.length !== 3) {
-        console.log("잘못된 입력입니다. 다시 입력해주세요");
-        this.userInput = "";
+      } else if (inputStr.length !== 3) {
+        this.answerState = "잘못된 입력입니다. 다시 입력해주세요";
+        console.log(this.answerState);
+        this.answerInput = "";
       } else {
-        console.log(`${this.currentTurn}플레이어 답안 : 합 ${this.userInput}`);
+        this.answerState = `${this.currentTurn}플레이어 답안 : 합 ${this.answerInput}`;
+        console.log(this.answerState);
         setTimeout(() => {
-          this.checkHap();
-          this.userInput = "";
+          this.checkHap(inputStr);
+          this.answerInput = "";
         }, 500);
       }
     },
     checkKyeol() {
       if (this.remainHapCount === 0) {
-        console.log("=> 정답 : 결입니다. +3점");
+        this.answerState = "=> 정답 : 결입니다. +3점";
+        console.log(this.answerState);
         this.$root.$emit("highlightHapKyeol", 0);
         this.$root.$emit("updateHapKyeol", 0);
         this.updatePlayerPoint(3);
@@ -77,27 +89,24 @@ export default {
           this.SET_CURRENT_MODE("end");
         }, 1000);
       } else {
-        console.log(
-          `=> 오답 : 결이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`
-        );
+        this.answerState = `=> 오답 : 결이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+        console.log(this.answerState);
         this.$root.$emit("occurError");
         this.updatePlayerPoint(-1);
       }
     },
-    checkHap() {
-      const answer = this._sort(this.userInput);
+    checkHap(inputStr) {
+      const answer = this._sort(inputStr);
       if (this.question.haps.includes(answer)) {
         if (this.currentHaps.includes(answer)) {
-          console.log(
-            `=> 오답 : 이미 나온 합입니다. -1점\n남은 합 개수 : ${this.remainHapCount}`
-          );
+          this.answerState = `=> 오답 : 이미 나온 합입니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+          console.log(this.answerState);
           this.$root.$emit("occurError");
           this.updatePlayerPoint(-1);
         } else {
-          console.log(
-            `=> 정답 : 합입니다. +1점\n남은 합 개수 : ${this.remainHapCount -
-              1}`
-          );
+          this.answerState = `=> 정답 : 합입니다. +1점\n남은 합 개수 : ${this
+            .remainHapCount - 1}`;
+          console.log(this.answerState);
           this.$root.$emit("highlightHapKyeol", answer);
           this.$root.$emit("updateHapKyeol", answer);
           this.updatePlayerPoint(1);
@@ -105,9 +114,8 @@ export default {
           this.remainHapCount -= 1;
         }
       } else {
-        console.log(
-          `=> 오답 : 합이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`
-        );
+        this.answerState = `=> 오답 : 합이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+        console.log(this.answerState);
         this.$root.$emit("occurError");
         this.updatePlayerPoint(-1);
       }
