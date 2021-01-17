@@ -70,7 +70,7 @@ export default {
 .hap-table-area .hap {
   width: 100%;
   flex: 1;
-  background-color: #fff;
+  background-color: #f1f0f0;
   position: relative;
   border: 3px solid #000;
   &:not(:first-child) {

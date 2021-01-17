@@ -1,14 +1,12 @@
 <template>
   <div id="app" class="kyeol-hap">
-    <section class="question-section">
+    <section class="play-section">
       <RoundHeading />
       <TileBoard />
       <HapTable />
     </section>
-    <section class="input-point-section">
-      <EnterInput />
-      <playerPoint />
-    </section>
+    <PlayerTimer />
+    <EnterInput class="input-section" />
   </div>
 </template>
 
@@ -17,7 +15,7 @@ import RoundHeading from "./components/RoundHeading.vue";
 import HapTable from "./components/HapTable.vue";
 import TileBoard from "./components/TileBoard.vue";
 import EnterInput from "./components/EnterInput.vue";
-import PlayerPoint from "./components/PlayerPoint.vue";
+import PlayerTimer from "./components/PlayerTimer.vue";
 
 export default {
   name: "App",
@@ -26,7 +24,7 @@ export default {
     HapTable,
     TileBoard,
     EnterInput,
-    PlayerPoint,
+    PlayerTimer,
   },
 };
 </script>
@@ -39,19 +37,16 @@ export default {
   position: relative;
 }
 
-.kyeol-hap .question-section {
+.kyeol-hap .play-section {
   width: 100%;
   height: 91.2rem;
   padding: 3.6rem;
   display: flex;
 }
 
-.kyeol-hap .input-point-section {
+.kyeol-hap .input-section {
   position: fixed;
   left: 0;
-  right: 0;
   bottom: 0;
-  display: flex;
-  justify-content: space-between;
 }
 </style>

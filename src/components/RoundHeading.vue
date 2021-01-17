@@ -48,7 +48,7 @@ export default {
   h1 {
     font-size: 10.8rem;
     font-weight: 600;
-    color: #000;
+    color: #f1f0f0;
   }
   .tutorial h1 {
     font-size: 8.4rem;
