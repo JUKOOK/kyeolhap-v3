@@ -2,8 +2,8 @@
   <div class="question-area">
     <div
       class="cover-board"
-      :class="{ 'end-game': currentRound === 4 }"
-      v-if="currentMode === 'end'"
+      :class="{ 'end-game': currentRound === 15 }"
+      v-if="currentMode === 'stop'"
     >
       <button type="button" class="btn-start-round" @click="startNextRound">
         {{ currentRound + 1 }} ROUND
@@ -40,8 +40,74 @@
         height="840"
         v-if="currentRound === 4"
       />
+      <img
+        src="../assets/img/Q5.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 5"
+      />
+      <img
+        src="../assets/img/Q6.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 6"
+      />
+      <img
+        src="../assets/img/Q7.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 7"
+      />
+      <img
+        src="../assets/img/Q8.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 8"
+      />
+      <img
+        src="../assets/img/Q9.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 9"
+      />
+      <img
+        src="../assets/img/Q10.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 10"
+      />
+      <img
+        src="../assets/img/Q11.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 11"
+      />
+      <img
+        src="../assets/img/Q12.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 12"
+      />
+      <img
+        src="../assets/img/Q13.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 13"
+      />
+      <img
+        src="../assets/img/Q14.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 14"
+      />
+      <img
+        src="../assets/img/Q15.png"
+        width="840"
+        height="840"
+        v-if="currentRound === 15"
+      />
     </div>
-    <div class="tile-border-wrap" ref="borderWrap">
+    <div class="tile-border-wrap" ref="borderWrap" @click="stopRound">
       <div class="tile-border" ref="tile1"></div>
       <div class="tile-border" ref="tile2"></div>
       <div class="tile-border" ref="tile3"></div>
@@ -75,10 +141,19 @@ export default {
     this.$root.$off("occurError");
   },
   methods: {
-    ...mapMutations(["SET_CURRENT_TURN", "SET_CURRENT_MODE"]),
+    ...mapMutations([
+      "SET_CURRENT_ROUND",
+      "SET_CURRENT_MODE",
+      "TOGGLE_CURRENT_TURN",
+    ]),
+    stopRound() {
+      this.SET_CURRENT_MODE("stop");
+      this.$root.$emit("forceStopTimer");
+    },
     startNextRound() {
-      this.SET_CURRENT_TURN(this.currentRound + 1);
+      this.SET_CURRENT_ROUND(this.currentRound + 1);
       this.SET_CURRENT_MODE("play");
+      this.TOGGLE_CURRENT_TURN();
     },
     drawBorderAnswer(answer) {
       if (answer === 0) {
@@ -162,6 +237,7 @@ export default {
   background-color: rgba(0, 0, 0, 0);
   display: flex;
   flex-wrap: wrap;
+  cursor: pointer;
   .tile-border {
     width: 28rem;
     height: 28rem;
@@ -190,13 +266,13 @@ export default {
       height: 100%;
     }
     &::before {
-      border-top-color: gold;
-      border-right-color: gold;
+      border-top-color: aqua;
+      border-right-color: aqua;
       transition: width 0.4s ease-out, height 0.4s ease-out 0.4s;
     }
     &::after {
-      border-bottom-color: gold;
-      border-left-color: gold;
+      border-bottom-color: aqua;
+      border-left-color: aqua;
       transition: height 0.4s ease-out, width 0.4s ease-out 0.4s;
     }
   }

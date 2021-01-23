@@ -24,8 +24,8 @@
         <p class="point">{{ p1Point }}</p>
       </div>
     </div>
-    <div class="timer">
-      <h2 class="count">10</h2>
+    <div class="timer" @click="pauseTimer">
+      <h2 class="count">{{ countDown }}</h2>
     </div>
     <div class="player-2" :class="{ active: currentTurn === 2 }">
       <div class="player-point">
@@ -59,7 +59,13 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["currentRound", "currentTurn", "p1Point", "p2Point"]),
+    ...mapState([
+      "currentRound",
+      "currentTurn",
+      "p1Point",
+      "p2Point",
+      "countDown",
+    ]),
   },
   watch: {
     currentRound: {
@@ -74,6 +80,9 @@ export default {
   },
   methods: {
     ...mapMutations(["CLEAR_P1_POINT", "CLEAR_P2_POINT"]),
+    pauseTimer() {
+      this.$root.$emit("forcePasueTimer");
+    },
   },
 };
 </script>
@@ -143,7 +152,7 @@ export default {
     content: "";
     width: 100%;
     height: 100%;
-    border: 3px solid #1c6d31;
+    border: 4px solid #1c6d31;
     border-radius: 0.8rem;
     position: absolute;
   }
@@ -167,6 +176,7 @@ export default {
   position: relative;
   background: url("../assets/img/clock.png") center center no-repeat;
   background-size: contain;
+  cursor: pointer;
   .count {
     width: 9.7rem;
     line-height: 9.5rem;

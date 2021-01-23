@@ -4,10 +4,11 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
-
+import { timerMixin } from "../mixins/timer";
 import questionConst from "../core/question-contants.js";
 
 export default {
+  mixins: [timerMixin],
   data() {
     return {
       answerInput: "",
@@ -41,6 +42,9 @@ export default {
         );
       },
     },
+    currentTurn() {
+      this.answerState = `현재 ${this.currentTurn}팀의 턴입니다.`;
+    },
     answerInput() {
       this.keyEnter();
     },
@@ -59,8 +63,9 @@ export default {
         "----------------------------------------------------------------------------------"
       );
       if (inputStr === "0") {
-        this.answerState = `${this.currentTurn}플레이어 답안 : 결`;
+        this.answerState = `${this.currentTurn}팀 답안 : 결`;
         console.log(this.answerState);
+        this.stopTimer();
         setTimeout(() => {
           this.checkKyeol();
           this.answerInput = "";
@@ -70,12 +75,13 @@ export default {
         console.log(this.answerState);
         this.answerInput = "";
       } else {
-        this.answerState = `${this.currentTurn}플레이어 답안 : 합 ${this.answerInput}`;
+        this.answerState = `${this.currentTurn}팀 답안 : 합 ${this.answerInput}`;
         console.log(this.answerState);
+        this.stopTimer();
         setTimeout(() => {
           this.checkHap(inputStr);
           this.answerInput = "";
-        }, 500);
+        }, 750);
       }
     },
     checkKyeol() {
@@ -85,14 +91,13 @@ export default {
         this.$root.$emit("highlightHapKyeol", 0);
         this.$root.$emit("updateHapKyeol", 0);
         this.updatePlayerPoint(3);
-        setTimeout(() => {
-          this.SET_CURRENT_MODE("end");
-        }, 1000);
+        this.postProcessCheck(3);
       } else {
         this.answerState = `=> 오답 : 결이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
         console.log(this.answerState);
         this.$root.$emit("occurError");
         this.updatePlayerPoint(-1);
+        this.postProcessCheck(-1);
       }
     },
     checkHap(inputStr) {
@@ -103,6 +108,7 @@ export default {
           console.log(this.answerState);
           this.$root.$emit("occurError");
           this.updatePlayerPoint(-1);
+          this.postProcessCheck(-1);
         } else {
           this.answerState = `=> 정답 : 합입니다. +1점\n남은 합 개수 : ${this
             .remainHapCount - 1}`;
@@ -110,7 +116,9 @@ export default {
           this.$root.$emit("highlightHapKyeol", answer);
           this.$root.$emit("updateHapKyeol", answer);
           this.updatePlayerPoint(1);
+          this.postProcessCheck(1);
           this.currentHaps.push(answer);
+          this.currentHapCount += 1;
           this.remainHapCount -= 1;
         }
       } else {
@@ -118,6 +126,7 @@ export default {
         console.log(this.answerState);
         this.$root.$emit("occurError");
         this.updatePlayerPoint(-1);
+        this.postProcessCheck(-1);
       }
     },
     updatePlayerPoint(point) {
@@ -127,7 +136,20 @@ export default {
         this.UPDATE_P2_POINT(point);
       }
       console.log(`P1 : P2 === ${this.p1Point} : ${this.p2Point}`);
-      this.TOGGLE_CURRENT_TURN();
+    },
+    postProcessCheck(point) {
+      if (point === 1) {
+        this.startCountDown(5); // 합 정답 : 결 시간제한 5초
+        this.answerState = `${this.currentTurn}팀 결 기회입니다.`;
+      } else if (point === 3) {
+        setTimeout(() => {
+          this.SET_CURRENT_MODE("stop"); // 결 정답 : 일시정지, 다음 라운드
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          this.TOGGLE_CURRENT_TURN(); // 오답 : 턴 넘기기
+        }, 1500);
+      }
     },
 
     _sort(numStr) {
