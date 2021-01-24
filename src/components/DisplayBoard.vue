@@ -20,17 +20,11 @@
         </div>
         <p class="team-name">TEAM 1</p>
       </div>
-      <div class="player-point">
-        <p class="point">{{ p1Point }}</p>
-      </div>
+      <PlayerPoint :player="1" :point="p1Point" />
     </div>
-    <div class="timer" @click="pauseTimer">
-      <h2 class="count">{{ countDown }}</h2>
-    </div>
+    <PlayerCount />
     <div class="player-2" :class="{ active: currentTurn === 2 }">
-      <div class="player-point">
-        <p class="point">{{ p2Point }}</p>
-      </div>
+      <PlayerPoint :player="2" :point="p2Point" />
       <div class="player-avatar">
         <div class="avatar-image">
           <img
@@ -57,32 +51,27 @@
 <script>
 import { mapMutations, mapState } from "vuex";
 
+import PlayerPoint from "./PlayerPoint.vue";
+import PlayerCount from "./PlayerCount.vue";
+
 export default {
+  components: { PlayerPoint, PlayerCount },
   computed: {
-    ...mapState([
-      "currentRound",
-      "currentTurn",
-      "p1Point",
-      "p2Point",
-      "countDown",
-    ]),
+    ...mapState(["currentRound", "currentTurn", "p1Point", "p2Point"]),
   },
   watch: {
     currentRound: {
       immediate: true,
       handler() {
         if (this.currentRound === 1) {
-          this.CLEAR_P1_POINT();
-          this.CLEAR_P2_POINT();
+          this.SET_P1_POINT(0);
+          this.SET_P2_POINT(0);
         }
       },
     },
   },
   methods: {
-    ...mapMutations(["CLEAR_P1_POINT", "CLEAR_P2_POINT"]),
-    pauseTimer() {
-      this.$root.$emit("forcePasueTimer");
-    },
+    ...mapMutations(["SET_P1_POINT", "SET_P2_POINT"]),
   },
 };
 </script>
@@ -132,17 +121,6 @@ export default {
       bottom: 6px;
     }
   }
-  .player-point {
-    width: 50%;
-    height: 100%;
-    padding: 1.2rem;
-    .point {
-      line-height: 8.4rem;
-      text-align: center;
-      font-size: 8.4rem;
-      color: #272424;
-    }
-  }
 }
 
 .point-panel .player-1.active,
@@ -164,24 +142,6 @@ export default {
   }
   .player-avatar .team-name {
     color: #1c6d31;
-  }
-}
-
-.point-panel .timer {
-  width: 10rem;
-  height: 10rem;
-  margin-top: 1rem;
-  border-radius: 50%;
-  background-color: #fff;
-  position: relative;
-  background: url("../assets/img/clock.png") center center no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  .count {
-    width: 9.7rem;
-    line-height: 9.5rem;
-    text-align: center;
-    font-size: 6.4rem;
   }
 }
 </style>

@@ -15,7 +15,7 @@ export const timerMixin = {
     this.$root.$on("forceStopTimer", () => {
       this.stopTimer();
     });
-    this.$root.$on("forcePasueTimer", () => {
+    this.$root.$on("forcePauseTimer", () => {
       if (this.timer.status === "running") this.pauseTimer();
       else if (this.timer.status === "paused") this.resumeTimer();
     });

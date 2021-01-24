@@ -6,7 +6,7 @@
       v-if="currentMode === 'stop'"
     >
       <button type="button" class="btn-start-round" @click="startNextRound">
-        {{ currentRound + 1 }} ROUND
+        <span class="btn-text"> {{ currentRound + 1 }} ROUND </span>
       </button>
     </div>
     <div class="tile-board">
@@ -188,6 +188,7 @@ export default {
   width: 84rem;
   height: 84rem;
   position: relative;
+  overflow: visible;
 }
 
 .question-area .cover-board {
@@ -199,13 +200,7 @@ export default {
   .btn-start-round {
     width: 29.6rem;
     height: 7.2rem;
-    line-height: 6.4rem;
     border-radius: 4px;
-    padding: 4px 0;
-    font-size: 3.2rem;
-    text-align: center;
-    font-weight: 800;
-    letter-spacing: 1.6px;
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -213,6 +208,18 @@ export default {
     transform: translate(-50%, -50%);
     &:hover {
       outline: -webkit-focus-ring-color auto 1px;
+    }
+    .btn-text {
+      width: 18rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 1px;
+      font-size: 3.2rem;
+      text-align: center;
+      font-weight: 800;
+      letter-spacing: 1.6px;
     }
   }
   &.end-game {

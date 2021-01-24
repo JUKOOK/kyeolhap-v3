@@ -25,13 +25,17 @@ export default {
     question() {
       return questionConst.QUESTIONS[this.currentRound];
     },
+    isExtraRound() {
+      // 13라운드부터는 모든 점수가 2배되어 적용
+      return this.currentRound >= 13;
+    },
   },
   watch: {
     currentRound: {
       immediate: true,
       handler() {
         this.answerInput = "";
-        this.answerState = "";
+        this.answerState = `현재 ${this.currentTurn}팀의 턴입니다.`;
         this.currentHaps = [];
         this.currentHapCount = 0;
         this.remainHaps = [...this.question.haps];
@@ -85,48 +89,52 @@ export default {
       }
     },
     checkKyeol() {
+      const correntPoint = this.isExtraRound ? 6 : 3;
+      const inCorrentPoint = this.isExtraRound ? -2 : -1;
       if (this.remainHapCount === 0) {
-        this.answerState = "=> 정답 : 결입니다. +3점";
+        this.answerState = `=> 정답 : 결입니다. +${correntPoint}점`;
         console.log(this.answerState);
         this.$root.$emit("highlightHapKyeol", 0);
         this.$root.$emit("updateHapKyeol", 0);
-        this.updatePlayerPoint(3);
-        this.postProcessCheck(3);
+        this.updatePlayerPoint(correntPoint);
+        this.postProcessCheck("결");
       } else {
-        this.answerState = `=> 오답 : 결이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+        this.answerState = `=> 오답 : 결이 아닙니다. ${inCorrentPoint}점\n남은 합 개수 : ${this.remainHapCount}`;
         console.log(this.answerState);
         this.$root.$emit("occurError");
-        this.updatePlayerPoint(-1);
-        this.postProcessCheck(-1);
+        this.updatePlayerPoint(inCorrentPoint);
+        this.postProcessCheck("오답");
       }
     },
     checkHap(inputStr) {
       const answer = this._sort(inputStr);
+      const correntPoint = this.isExtraRound ? 2 : 1;
+      const inCorrentPoint = this.isExtraRound ? -2 : -1;
       if (this.question.haps.includes(answer)) {
         if (this.currentHaps.includes(answer)) {
-          this.answerState = `=> 오답 : 이미 나온 합입니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+          this.answerState = `=> 오답 : 이미 나온 합입니다. ${inCorrentPoint}점\n남은 합 개수 : ${this.remainHapCount}`;
           console.log(this.answerState);
           this.$root.$emit("occurError");
-          this.updatePlayerPoint(-1);
-          this.postProcessCheck(-1);
+          this.updatePlayerPoint(inCorrentPoint);
+          this.postProcessCheck("오답");
         } else {
-          this.answerState = `=> 정답 : 합입니다. +1점\n남은 합 개수 : ${this
+          this.answerState = `=> 정답 : 합입니다. +${correntPoint}점\n남은 합 개수 : ${this
             .remainHapCount - 1}`;
           console.log(this.answerState);
           this.$root.$emit("highlightHapKyeol", answer);
           this.$root.$emit("updateHapKyeol", answer);
-          this.updatePlayerPoint(1);
-          this.postProcessCheck(1);
+          this.updatePlayerPoint(correntPoint);
+          this.postProcessCheck("합");
           this.currentHaps.push(answer);
           this.currentHapCount += 1;
           this.remainHapCount -= 1;
         }
       } else {
-        this.answerState = `=> 오답 : 합이 아닙니다. -1점\n남은 합 개수 : ${this.remainHapCount}`;
+        this.answerState = `=> 오답 : 합이 아닙니다. ${inCorrentPoint}점\n남은 합 개수 : ${this.remainHapCount}`;
         console.log(this.answerState);
         this.$root.$emit("occurError");
-        this.updatePlayerPoint(-1);
-        this.postProcessCheck(-1);
+        this.updatePlayerPoint(inCorrentPoint);
+        this.postProcessCheck("오답");
       }
     },
     updatePlayerPoint(point) {
@@ -135,15 +143,17 @@ export default {
       } else if (this.currentTurn === 2) {
         this.UPDATE_P2_POINT(point);
       }
-      console.log(`P1 : P2 === ${this.p1Point} : ${this.p2Point}`);
     },
-    postProcessCheck(point) {
-      if (point === 1) {
+    postProcessCheck(condition) {
+      if (condition === "합") {
         this.startCountDown(5); // 합 정답 : 결 시간제한 5초
-        this.answerState = `${this.currentTurn}팀 결 기회입니다.`;
-      } else if (point === 3) {
+        setTimeout(() => {
+          this.answerState = `${this.currentTurn}팀 결 기회입니다.`;
+        }, 500);
+      } else if (condition === "결") {
         setTimeout(() => {
           this.SET_CURRENT_MODE("stop"); // 결 정답 : 일시정지, 다음 라운드
+          this.answerState = `${this.currentRound}라운드가 종료되었습니다.\n 현재 점수는 ${this.p1Point} : ${this.p2Point}입니다.`;
         }, 1000);
       } else {
         setTimeout(() => {

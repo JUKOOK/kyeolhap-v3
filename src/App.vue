@@ -5,7 +5,7 @@
       <TileBoard />
       <HapTable />
     </section>
-    <PlayerTimer />
+    <DisplayBoard />
     <EnterInput class="input-section" />
   </div>
 </template>
@@ -15,7 +15,7 @@ import RoundHeading from "./components/RoundHeading.vue";
 import HapTable from "./components/HapTable.vue";
 import TileBoard from "./components/TileBoard.vue";
 import EnterInput from "./components/EnterInput.vue";
-import PlayerTimer from "./components/PlayerTimer.vue";
+import DisplayBoard from "./components/DisplayBoard.vue";
 
 export default {
   name: "App",
@@ -24,7 +24,7 @@ export default {
     HapTable,
     TileBoard,
     EnterInput,
-    PlayerTimer,
+    DisplayBoard,
   },
 };
 </script>

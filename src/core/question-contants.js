@@ -61,13 +61,13 @@ const QUESTIONS = [
   },
   {
     id: 12,
-    hapCount: 0,
-    haps: [],
+    hapCount: 8,
+    haps: [128, 135, 147, 239, 257, 348, 459, 789],
   },
   {
     id: 13,
-    hapCount: 8,
-    haps: [128, 135, 147, 239, 257, 348, 459, 789],
+    hapCount: 0,
+    haps: [],
   },
   {
     id: 14,

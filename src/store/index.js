@@ -21,14 +21,14 @@ const store = new Vuex.Store({
     TOGGLE_CURRENT_TURN(state) {
       state.currentTurn = 3 - state.currentTurn;
     },
-    CLEAR_P1_POINT(state) {
-      state.p1Point = 0;
+    SET_P1_POINT(state, point) {
+      state.p1Point = point;
     },
     UPDATE_P1_POINT(state, diff) {
       state.p1Point += diff;
     },
-    CLEAR_P2_POINT(state) {
-      state.p2Point = 0;
+    SET_P2_POINT(state, point) {
+      state.p2Point = point;
     },
     UPDATE_P2_POINT(state, diff) {
       state.p2Point += diff;
