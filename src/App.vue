@@ -1,52 +1,26 @@
 <template>
-  <div id="app" class="kyeol-hap">
-    <section class="play-section">
-      <RoundHeading />
-      <TileBoard />
-      <HapTable />
-    </section>
-    <DisplayBoard />
-    <EnterInput class="input-section" />
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import RoundHeading from "./components/RoundHeading.vue";
-import HapTable from "./components/HapTable.vue";
-import TileBoard from "./components/TileBoard.vue";
-import EnterInput from "./components/EnterInput.vue";
-import DisplayBoard from "./components/DisplayBoard.vue";
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    RoundHeading,
-    HapTable,
-    TileBoard,
-    EnterInput,
-    DisplayBoard,
-  },
-};
+    HelloWorld
+  }
+}
 </script>
 
 <style>
 #app {
-  width: 100vw;
-  height: 100vh;
-  background-color: #7e3341;
-  position: relative;
-}
-
-.kyeol-hap .play-section {
-  width: 100%;
-  height: 91.2rem;
-  padding: 3.6rem;
-  display: flex;
-}
-
-.kyeol-hap .input-section {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
