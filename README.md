@@ -9,14 +9,15 @@
 - [결합게임 룰(영상)](https://www.youtube.com/watch?v=ExiILzxGDBY)
 
 - 프로그램 내 기본 설정값
-  - 플레이어 1 이름: A
-  - 플레이어 2 이름: B
-  - 총 라운드: 10
-  - 합 정답 획득 포인트: +1점
-  - 결 정답 획득 포인트: +3점
-  - 오답 차감 포인트: -1점
-  - 플레이어 합 제한 시간: 10초
-  - 합 정답 이후 결 제한 시간: 5초
+  - 플레이어 1 이름: **A**
+  - 플레이어 2 이름: **B**
+  - 총 라운드: **10**
+  - 합 정답 획득 포인트: **+1점**
+  - 결 정답 획득 포인트: **+3점**
+  - 오답 차감 포인트: **-1점**
+  - 플레이어 합 제한 시간: **10초**
+  - 합 정답 이후 결 제한 시간: **5초**
+  - 라운드별 합 시간초과 최대 턴(양 플레이어가 합을 제시하지 않고 일정 횟수 이상 시간초과한 경우, 라운드 종료): **6**
 
 ## Vue 2 버전
 
@@ -26,11 +27,11 @@
 
 - [Vue.js 3 시작하기](https://v3.ko.vuejs.org/guide/migration/introduction.html)
 
-  ```
-  yarn global add @vue/cli
-  vue create kyeolhap-v3 # select vue 3 preset
+  ```console
+  $ yarn global add @vue/cli
+  $ vue create kyeolhap-v3 # select vue 3 preset
   (새 프로젝트를 만들지 않고, 자체 업그레이드를 원할 경우, vue upgrade next)
-  yarn upgrade vue@next # 생성된 Vue 3 프로젝트는 기본적으로 3.0.0 버전이므로 최신 버전으로 올려준다.
+  $ yarn upgrade vue@next # 생성된 Vue 3 프로젝트는 기본적으로 3.0.0 버전이므로 최신 버전으로 올려준다.
   ```
 
 - 추가된 `kyeolhap-v3/` 디렉토리와 내부 프로젝트 파일들 확인(`src/`, `public/`, `node_modules/`, `.gitignore`, `babel.config.js`, `package.json`, `yarn.lock`)
