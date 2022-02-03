@@ -1,5 +1,6 @@
 <template>
-  <div id="app" class="kyeol-hap">
+  <div id="app">
+    <router-view />
     <!-- <section class="play-section">
       <RoundHeading />
       <TileBoard />

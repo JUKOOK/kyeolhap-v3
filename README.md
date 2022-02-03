@@ -25,6 +25,8 @@
 
 ## Vue 3 마이그레이션 과정
 
+### 시작하기
+
 - [Vue.js 3 시작하기](https://v3.ko.vuejs.org/guide/migration/introduction.html)
 
   ```console
@@ -43,6 +45,18 @@
 - `kyeolhap-v3/` 디렉토리 삭제
 
 - `yarn serve` 테스트
+
+### Vue-router 추가하기
+
+- [Vue Router](https://router.vuejs.org/kr/)
+
+- [Vue3에 vue-router 추가하기](https://velog.io/@cindy-choi/Vue3-%EC%97%90-vue-route-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0)
+
+- [vue3, vue-router로 라우팅하기](https://velog.io/@mahns/vue-router-vue3)
+
+  ```console
+  $ yarn add vue-router@next # Vue.js 3을 위한 vue-router
+  ```
 
 ## Customize configuration
 
