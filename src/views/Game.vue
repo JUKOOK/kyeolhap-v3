@@ -1,9 +1,35 @@
 <template>
-  <div class="kyeol-hap"></div>
+  <div class="kyeol-hap">
+    <DisplayRound :current-round="currentRound" />
+  </div>
 </template>
 
 <script>
-export default {};
+import BoardManager from "../stuff/board-manager.js";
+import Player from "../stuff/player.js";
+import Const from "../stuff/constants.js";
+
+import DisplayRound from "../components/DisplayRound.vue";
+
+export default {
+  components: { DisplayRound },
+  data() {
+    return {
+      board: new BoardManager(true),
+      player1: new Player(Const.DEFAULT_PLAYER1_NAME),
+      player2: new Player(Const.DEFAULT_PLAYER2_NAME),
+      totalRound: Const.DEFAULT_TOTAL_ROUND,
+      currentRound: 0,
+
+      hapCorrectPoint: Const.HAP_CORRENT_POINT,
+      kyeolCorrectPoint: Const.KYEOL_CORRENT_POINT,
+      wrongPoint: Const.WRONG_ANSWER_POINT,
+    };
+  },
+  // mounted() {
+
+  // }
+};
 </script>
 
 <style></style>
