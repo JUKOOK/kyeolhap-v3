@@ -1,6 +1,7 @@
 <template>
   <div class="kyeol-hap">
     <DisplayRound :current-round="currentRound" />
+    <GameBoard :board="board" />
   </div>
 </template>
 
@@ -10,9 +11,10 @@ import Player from "../stuff/player.js";
 import Const from "../stuff/constants.js";
 
 import DisplayRound from "../components/DisplayRound.vue";
+import GameBoard from "../components/GameBoard.vue";
 
 export default {
-  components: { DisplayRound },
+  components: { DisplayRound, GameBoard },
   data() {
     return {
       board: new BoardManager(true),
@@ -26,10 +28,11 @@ export default {
       wrongPoint: Const.WRONG_ANSWER_POINT,
     };
   },
-  // mounted() {
-
-  // }
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.kyeol-hap {
+  display: flex;
+}
+</style>

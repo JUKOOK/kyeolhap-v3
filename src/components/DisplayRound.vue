@@ -1,5 +1,5 @@
 <template>
-  <div class="round-heading-area">
+  <div class="display-round">
     <div class="tutorial" v-if="currentRound === 0">
       <h1>T</h1>
       <h1>U</h1>
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.round-heading-area {
+.display-round {
   width: 28rem;
   height: 100%;
   margin-right: 3.6rem;
