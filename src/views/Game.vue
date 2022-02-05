@@ -2,6 +2,7 @@
   <div class="kyeol-hap">
     <DisplayRound :current-round="currentRound" />
     <GameBoard :board="board" />
+    <AnswerList :board="board" />
   </div>
 </template>
 
@@ -12,9 +13,10 @@ import Const from "../stuff/constants.js";
 
 import DisplayRound from "../components/DisplayRound.vue";
 import GameBoard from "../components/GameBoard.vue";
+import AnswerList from "../components/AnswerList.vue";
 
 export default {
-  components: { DisplayRound, GameBoard },
+  components: { DisplayRound, GameBoard, AnswerList },
   data() {
     return {
       board: new BoardManager(true),

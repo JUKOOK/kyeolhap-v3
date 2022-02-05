@@ -37,6 +37,7 @@ export default class BoardManager {
     this.tiles = this.generateBoard(isTutorial);
     this.answers = this.generateAnswers();
     this.remainingAnswers = [...this.answers];
+    this.currentAnswers = ["123", "결"];
   }
   generateBoard(isTutorial) {
     if (isTutorial) return this._getTutorialBoard();
@@ -107,6 +108,7 @@ export default class BoardManager {
     const idx = this.remainingAnswers.findIndex(sorted);
     if (idx > -1) {
       this.remainingAnswers.splice(idx, 1);
+      this.currentAnswers.push(sorted);
       return true;
     } else return false;
   }
@@ -116,6 +118,7 @@ export default class BoardManager {
       this.remainingAnswers[0] === "0"
     ) {
       this.remainingAnswers.splice(0, 1);
+      this.currentAnswers.push("결");
       return true;
     } else return false;
   }
