@@ -11,6 +11,16 @@ const routes = [
     name: "tutorial",
     component: () => import("./views/Tutorial.vue"),
   },
+  {
+    path: "/solo",
+    name: "soloGame",
+    component: () => import("./views/SoloGame.vue"),
+  },
+  {
+    path: "/1v1",
+    name: "battleGame",
+    component: () => import("./views/BattleGame.vue"),
+  },
 ];
 
 export const router = createRouter({
