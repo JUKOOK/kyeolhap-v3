@@ -1,6 +1,6 @@
 <template>
   <div class="answer-list">
-    <div class="answer" v-for="n in 14" :key="n" v-html="renderAnswer(n - 1)" />
+    <div class="answer" v-for="n in 12" :key="n" v-html="renderAnswer(n - 1)" />
   </div>
 </template>
 

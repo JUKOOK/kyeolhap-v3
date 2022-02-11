@@ -28,33 +28,41 @@ const TILES = [
   { shape: 3, figureColor: 3, bgColor: 3 },
 ];
 
+const TUTORIAL_TILES = [
+  { shape: 1, figureColor: 2, bgColor: 1 },
+  { shape: 1, figureColor: 2, bgColor: 2 },
+  { shape: 1, figureColor: 3, bgColor: 3 },
+  { shape: 2, figureColor: 1, bgColor: 2 },
+  { shape: 2, figureColor: 2, bgColor: 2 },
+  { shape: 2, figureColor: 3, bgColor: 3 },
+  { shape: 3, figureColor: 3, bgColor: 1 },
+  { shape: 1, figureColor: 1, bgColor: 2 },
+  { shape: 3, figureColor: 2, bgColor: 1 },
+];
+
 const isMultiple3 = (num) => {
   return num % 3 === 0;
 };
 
 export default class BoardManager {
   constructor(isTutorial) {
-    this.tiles = this.generateBoard(isTutorial);
-    this.answers = this.generateAnswers();
+    do {
+      this.tiles = isTutorial ? TUTORIAL_TILES : this.generateBoard();
+      this.answers = this.generateAnswers();
+    } while (this.answers.length > 12);
     this.remainingAnswers = [...this.answers];
-    this.currentAnswers = ["123", "결"];
+    this.currentAnswers = [];
   }
-  generateBoard(isTutorial) {
-    if (isTutorial) return this._getTutorialBoard();
-
-    const indices = [];
+  generateBoard() {
+    const tileIndices = [];
     for (let i = 0; i < 9; i++) {
       const num = Math.floor(Math.random() * 27);
-      if (indices.includes(num)) {
-        i -= 1;
-      } else {
-        indices.push(num);
-      }
+      if (tileIndices.includes(num)) i -= 1;
+      else tileIndices.push(num);
     }
-    return indices.map((i) => TILES[i]);
+    return tileIndices.map((index) => TILES[index]);
   }
   generateAnswers() {
-    // if (isTutorial) return this._getTutorialAnswers();
     const arr = [];
     for (let i = 1; i <= 9; i++) {
       for (let j = i + 1; j <= 9; j++) {
@@ -87,19 +95,6 @@ export default class BoardManager {
     }
     arr.push("0");
     return arr;
-  }
-  _getTutorialBoard() {
-    return [
-      { shape: 1, figureColor: 2, bgColor: 1 },
-      { shape: 1, figureColor: 2, bgColor: 2 },
-      { shape: 1, figureColor: 3, bgColor: 3 },
-      { shape: 2, figureColor: 1, bgColor: 2 },
-      { shape: 2, figureColor: 2, bgColor: 2 },
-      { shape: 2, figureColor: 3, bgColor: 3 },
-      { shape: 3, figureColor: 3, bgColor: 1 },
-      { shape: 1, figureColor: 1, bgColor: 2 },
-      { shape: 3, figureColor: 2, bgColor: 1 },
-    ];
   }
   checkHap(hap) {
     if (this.remainingAnswers.length <= 1) return false;
