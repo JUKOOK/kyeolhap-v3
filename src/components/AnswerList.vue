@@ -26,11 +26,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.answer-list {
-  width: 24rem;
-  margin-left: 7.6rem;
-}
-
 .answer-list .answer {
   width: 100%;
   height: 4.8rem;

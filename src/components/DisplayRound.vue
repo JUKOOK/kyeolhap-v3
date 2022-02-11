@@ -33,7 +33,7 @@ export default {
 .display-round {
   width: 28rem;
   height: 100%;
-  margin-right: 3.6rem;
+  // margin-right: 3.6rem;
   .tutorial,
   .round {
     width: 100%;

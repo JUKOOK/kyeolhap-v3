@@ -1,8 +1,6 @@
 <template>
   <div class="triangle-tile">
     <svg
-      width="200"
-      height="200"
       viewBox="0 0 300 300"
       style="display: block"
       fill="none"

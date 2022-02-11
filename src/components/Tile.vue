@@ -76,13 +76,11 @@ export default {
 
 <style lang="scss" scoped>
 .tile {
-  width: 20rem;
-  height: 20rem;
   position: relative;
   border: 1px solid #745e57;
   .tile-number {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -92,7 +90,7 @@ export default {
     align-items: center;
     .number {
       width: 100%;
-      font-size: 2rem;
+      font-size: 2.4rem;
       font-weight: 600;
       text-align: center;
     }

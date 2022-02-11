@@ -22,7 +22,6 @@ export default {
 
 <style lang="scss" scoped>
 .game-board {
-  // height: 60rem;
   background-color: rgba(7, 0, 0, 0.75);
 
   display: grid;
