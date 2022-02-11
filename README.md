@@ -45,7 +45,7 @@
 
 - [결합게임(구, Vue 2)](https://github.com/JUKOOK/kyeolhap)
 
-## Vue 3 마이그레이션 과정
+## Vue 3 업그레이드 과정
 
 ### 시작하기
 
@@ -79,6 +79,14 @@
   ```console
   $ yarn add vue-router@next # Vue.js 3을 위한 vue-router
   ```
+
+### Option API에서 Composition API 마이그레이션
+
+- [Composition API: setup()](https://vuejs.org/api/composition-api-setup.html#setup-context)
+
+- [stackoverflow](https://stackoverflow.com/questions/67097067/how-to-convert-options-api-to-composition-api-in-vue-js)
+
+- [블로그 참고](https://dev.to/mikhailkaran/vue-3-options-to-composition-api-migration-3567)
 
 ## Customize configuration
 
